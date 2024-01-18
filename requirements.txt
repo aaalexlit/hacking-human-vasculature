@@ -1,0 +1,9 @@
+gsutil
+ultralytics
+ipykernel
+jupyter
+matplotlib
+wandb
+gcsfs
+tensorflow
+tifffile
