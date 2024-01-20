@@ -1,3 +1,7 @@
 *.pdf
 notebooks/.ipynb_checkpoints
 __pycache__/
+wandb/
+notebooks/blood_vessel_segmentation/
+yolov8n-seg.pt
+labels.cache
