@@ -24,5 +24,3 @@ results = model.train(data=yaml_path,
                       imgsz=1600,
                       cache=True
                      )
-
-model.export(imgsz=1600)
