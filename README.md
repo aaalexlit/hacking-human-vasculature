@@ -50,4 +50,17 @@ jupyter notebook
 
 Notebooks description:
 
+### [EDA](notebooks/EDA.ipynb)
+Full dataset EDA notebook.  
+**Note:** Can be run locally but proper execution on Windows in not guaranteed  
+The purpose is to explore the whole dataset and the task,
+ and decide how to reduce it for the project
 
+### [Create smaller dataset](notebooks/Create_train_val_test_datasets.ipynb)
+Create smaller dataset from the full one.  
+The dataset obtained as a result of the notebook execution is already present in the 
+notebook so the code is provided for reference, it doesn't need to be executed 
+unless you want to change the dataset.
+**Note:** Can be run locally but proper execution on Windows in not guaranteed  
+
+###
