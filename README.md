@@ -2,6 +2,9 @@
 
 This project intends to find a solution to the ongoing (at the time of writing January 2024) kaggle competition [SenNet + HOA - Hacking the Human Vasculature in 3D](https://www.kaggle.com/competitions/blood-vessel-segmentation/overview)
 
+The project runs are logged to Weights&Biases:  
+https://wandb.ai/aaalex-lit/blood_vessel_segmentation
+
 ## Project description
 
 Here's a summary of project description:
@@ -63,4 +66,8 @@ notebook so the code is provided for reference, it doesn't need to be executed
 unless you want to change the dataset.
 **Note:** Can be run locally but proper execution on Windows in not guaranteed  
 
-###
+### [Baseline Training](notebooks/baseline_training.ipynb)
+Initial Experiments with different images sizes and batch sizes  
+**Note:**  The notebook is meant to be executed on [Google Colab](https://colab.research.google.com/)  
+Logged to WandB: https://wandb.ai/aaalex-lit/blood_vessel_segmentation
+
