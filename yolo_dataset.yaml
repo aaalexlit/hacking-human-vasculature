@@ -1,0 +1,7 @@
+names:
+  0: Vessel
+nc: 1
+path: ./dataset # dataset root dir
+test: test
+train: train
+val: val

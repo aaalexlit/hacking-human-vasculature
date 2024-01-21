@@ -6,3 +6,4 @@ notebooks/blood_vessel_segmentation/
 yolov8n-seg.pt
 labels.cache
 artifacts/
+blood_vessel_segmentation/

@@ -101,3 +101,27 @@ The best hyperparameters can be found in the [best_hyperparameters.yaml](hyperpa
 
 They're used in the following notebook to train the final model.
 
+## [Final model training](notebooks/train_final_model_best_hyperparams.ipynb)
+
+In the end it appeared that in fact it was a mistake to train image size 1024 with
+batch 4 for longer even with the best hyperparametes.
+It's clear from WandB graphs that image size 1600 with batch size 9 shows much better
+performance with shorter training time. 
+So the final model is trained with these parameters.
+The training of the final model is exported to a separate script.
+
+## Model training script
+
+[train.py](train.py)
+
+> **Please note that the script is designed to be trained on GPU with at least 15G of GPU RAM (I ran the training on the Google Colab T4).   
+> If you try to run it on your computer and you're not on Mac and with no GPU it will most likely fail with OOM.**
+
+I tried to run it on my Mac M2 and it worked but still estimated to run 4 minutes
+per epoch that is way too much compared to ~25 seconds per epoch on Google Colab with T4
+
+To run the training execute (make sure to have `blood-vessel-segmentation` environment is activated)
+
+```shell
+python train.py
+```
