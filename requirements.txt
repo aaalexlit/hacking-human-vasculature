@@ -7,3 +7,5 @@ wandb
 gcsfs
 ipywidgets
 numba
+fastapi
+uvicorn

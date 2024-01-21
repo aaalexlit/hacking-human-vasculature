@@ -125,3 +125,15 @@ To run the training execute (make sure to have `blood-vessel-segmentation` envir
 ```shell
 python train.py
 ```
+
+# Model deployment 
+
+Model is deployed with [FastAPI](https://fastapi.tiangolo.com/) + Uvicorn
+To run the service locally execute
+```shell
+python predict.py
+```
+That will spin up uvicorn server on port 8000 (make sure it's not occupied)
+
+The api can be tested right from the built-in Swagger UI that can be found on http://127.0.0.1:8000/docs
+
