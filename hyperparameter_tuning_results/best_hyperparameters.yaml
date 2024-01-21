@@ -1,0 +1,29 @@
+# 30/30 iterations complete ✅ (6414.87s)
+# Results saved to blood_vessel_segmentation/tune
+# Best fitness=0.34726 observed at iteration 1
+# Best fitness metrics are {'metrics/precision(B)': 0.57028, 'metrics/recall(B)': 0.24676, 'metrics/mAP50(B)': 0.28238, 'metrics/mAP50-95(B)': 0.15513, 'metrics/precision(M)': 0.47646, 'metrics/recall(M)': 0.26639, 'metrics/mAP50(M)': 0.31251, 'metrics/mAP50-95(M)': 0.16461, 'val/box_loss': 1.35056, 'val/seg_loss': 1.14584, 'val/cls_loss': 1.13323, 'val/dfl_loss': 0.86719, 'fitness': 0.34726}
+# Best fitness model is blood_vessel_segmentation/hyperparameter_tuning
+# Best fitness hyperparameters are printed below.
+
+lr0: 0.01
+lrf: 0.01
+momentum: 0.937
+weight_decay: 0.0005
+warmup_epochs: 3.0
+warmup_momentum: 0.8
+box: 7.5
+cls: 0.5
+dfl: 1.5
+hsv_h: 0.015
+hsv_s: 0.7
+hsv_v: 0.4
+degrees: 0.0
+translate: 0.1
+scale: 0.5
+shear: 0.0
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.5
+mosaic: 1.0
+mixup: 0.0
+copy_paste: 0.0
