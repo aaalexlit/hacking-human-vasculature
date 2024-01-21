@@ -7,14 +7,29 @@ https://wandb.ai/aaalex-lit/blood_vessel_segmentation
 
 ## Project description
 
-Here's a summary of project description:
+Here's a short summary of the competition description:
 
-The goal of the competition is to segment blood vessels . You will create a model trained on 3D Hierarchical Phase-Contrast Tomography (HiP-CT) data from human kidneys to help complete a picture of vasculature throughout a body.
+The goal of the competition is to segment blood vessels by creating a model trained on 3D Hierarchical Phase-Contrast Tomography (HiP-CT) data from human kidneys to help complete a picture of vasculature throughout a body.
 
-Your work will better researchers' understanding of the size, shape, branching angles, and patterning of blood vessels in human tissue.
+This work will better researchers' understanding of the size, shape, branching angles, and patterning of blood vessels in human tissue.
 
 Please see the detailed description on the [competitions' page](https://www.kaggle.com/competitions/blood-vessel-segmentation/overview/description)
 
+In this particular project we will set a bit more humble goal. We will only use 2D data to train 
+a segmentation model and we will train it only on a part of the whole data.
+To solve this problem we will apply YOLOv8 segmentation model from [Ultralytics](https://docs.ultralytics.com/)
+training it on the selected subset of the whole competition data.
+
+>YOLOv8 is the latest version of YOLO by Ultralytics. As a cutting-edge, state-of-the-art (SOTA) model, YOLOv8 builds on the success of previous versions, introducing new features and improvements for enhanced performance, flexibility, and efficiency. YOLOv8 supports a full range of vision AI tasks, including detection, segmentation, pose estimation, tracking, and classification. 
+
+## The dataset
+
+The complete dataset is [available on Kaggle](https://www.kaggle.com/competitions/blood-vessel-segmentation/data) 
+This repo contains a small part of the full dataset images along with the 
+masks that were modified compared to the original dataset by converting the original
+binary masks to YOLOv8-accepted text format.
+
+>Yashvardhan Jain, Katy Borner, Claire Walsh, Nancy Ruschman, Peter D. Lee, Griffin M. Weber, Ryan Holbrook, Addison Howard. (2023). SenNet + HOA - Hacking the Human Vasculature in 3D. Kaggle. https://kaggle.com/competitions/blood-vessel-segmentation
 
 # Reproduce the work
 
@@ -55,19 +70,34 @@ Notebooks description:
 
 ### [EDA](notebooks/EDA.ipynb)
 Full dataset EDA notebook.  
-**Note:** Can be run locally but proper execution on Windows in not guaranteed  
+>**Note:** Can be run locally (proper execution on Windows in not guaranteed)  
+
 The purpose is to explore the whole dataset and the task,
  and decide how to reduce it for the project
 
 ### [Create smaller dataset](notebooks/Create_train_val_test_datasets.ipynb)
+>**Note:** Can be run locally (proper execution on Windows in not guaranteed)  
+
 Create smaller dataset from the full one.  
 The dataset obtained as a result of the notebook execution is already present in the 
 notebook so the code is provided for reference, it doesn't need to be executed 
 unless you want to change the dataset.
-**Note:** Can be run locally but proper execution on Windows in not guaranteed  
 
 ### [Baseline Training](notebooks/baseline_training.ipynb)
+>**Note:**  The notebook is meant to be executed on [Google Colab](https://colab.research.google.com/)  
+
 Initial Experiments with different images sizes and batch sizes  
-**Note:**  The notebook is meant to be executed on [Google Colab](https://colab.research.google.com/)  
 Logged to WandB: https://wandb.ai/aaalex-lit/blood_vessel_segmentation
+
+### [Hyperparameter tuning](notebooks/hyperparameter_tuning.ipynb)
+>**Note:**  The notebook is meant to be executed on [Google Colab](https://colab.research.google.com/)  
+
+The results of the experimetnts can be fount in the [hyperparameter_tuning_results folder](hyperparameter_tuning_results/)
+
+Funny enough the best hyperparameters were achieved on the first iteration:
+![Tune Fitness Plot](hyperparameter_tuning_results/tune_fitness.png)
+
+The best hyperparameters can be found in the [best_hyperparameters.yaml](hyperparameter_tuning_results/best_hyperparameters.yaml)
+
+They're used in the following notebook to train the final model.
 
