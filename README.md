@@ -70,14 +70,14 @@ jupyter notebook
 
 Notebooks description:
 
-### [EDA](notebooks/EDA.ipynb)
+### [EDA notebook](notebooks/EDA.ipynb)
 Full dataset EDA notebook.  
 >**Note:** Can be run locally (proper execution on Windows in not guaranteed)  
 
 The purpose is to explore the whole dataset and the task,
  and decide how to reduce it for the project
 
-### [Create smaller dataset](notebooks/Create_train_val_test_datasets.ipynb)
+### [Create smaller dataset notebook](notebooks/Create_train_val_test_datasets.ipynb)
 >**Note:** Can be run locally (proper execution on Windows in not guaranteed)  
 
 Create smaller dataset from the full one.  
@@ -85,13 +85,13 @@ The dataset obtained as a result of the notebook execution is already present in
 notebook so the code is provided for reference, it doesn't need to be executed 
 unless you want to change the dataset.
 
-### [Baseline Training](notebooks/baseline_training.ipynb)
+### [Baseline Training notebook](notebooks/baseline_training.ipynb)
 >**Note:**  The notebook is meant to be executed on [Google Colab](https://colab.research.google.com/)  
 
 Initial Experiments with different images sizes and batch sizes  
 Logged to WandB: https://wandb.ai/aaalex-lit/blood_vessel_segmentation
 
-### [Hyperparameter tuning](notebooks/hyperparameter_tuning.ipynb)
+### [Hyperparameter tuning notebook](notebooks/hyperparameter_tuning.ipynb)
 >**Note:**  The notebook is meant to be executed on [Google Colab](https://colab.research.google.com/)  
 
 The results of the experimetnts can be fount in the [hyperparameter_tuning_results folder](hyperparameter_tuning_results/)
@@ -103,7 +103,7 @@ The best hyperparameters can be found in the [best_hyperparameters.yaml](hyperpa
 
 They're used in the following notebook to train the final model.
 
-## [Final model training](notebooks/train_final_model_best_hyperparams.ipynb)
+## [Final model training notebook](notebooks/train_final_model_best_hyperparams.ipynb)
 
 In the end it appeared that in fact it was a mistake to train image size 1024 with
 batch 4 for longer even with the best hyperparametes.
@@ -112,7 +112,10 @@ performance with shorter training time.
 So the final model is trained with these parameters.
 The training of the final model is exported to a separate script.
 
-## Model training script
+## [Kaggle notebooks](kaggle_notebooks/)
+As the name suggests, the notebooks in the [kaggle_notebooks](kaggle_notebooks/) folder can be found and run on Kaggle. They are used in the competition, but none of them are directly utilized in this project.
+
+# Model training script
 
 [train.py](train.py)
 
