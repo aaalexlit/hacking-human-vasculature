@@ -7,3 +7,5 @@ yolov8n-seg.pt
 labels.cache
 artifacts/
 blood_vessel_segmentation/
+/*.tif
+/*.jpg

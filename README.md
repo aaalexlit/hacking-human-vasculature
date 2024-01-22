@@ -135,5 +135,40 @@ python predict.py
 ```
 That will spin up uvicorn server on port 8000 (make sure it's not occupied)
 
-The api can be tested right from the built-in Swagger UI that can be found on http://127.0.0.1:8000/docs
+The API can be tested directly in the browser using the built-in Swagger UI, accessible at http://127.0.0.1:8000/docs.
 
+There are 2 endpoints in the service
+
+1. `/predict_rle_mask`:  
+    returns the [Run-Length Encoded](https://en.wikipedia.org/wiki/Run-length_encoding) predicted mask.  
+   This format is required for competition submission.  
+   It's a lossless format and can be easily decoded back to a matrix on the other end.
+
+   Alternatively it can be tested from the command line using `curl`
+    ```shell
+    curl -X 'POST' \
+    'http://localhost:8000/predict_rle_mask' \
+    -H 'accept: application/json' \
+    -H 'Content-Type: application/json' \
+    -d '{
+    "url": "https://github.com/aaalexlit/hacking-human-vasculature/raw/main/dataset/test/images/1505.tif"
+    }'
+    ```
+
+2. `/predict_img`:  
+    returns a JPG image with the predicted masks and boxes.  
+    Added for the sake of quick assessment
+
+   Alternatively it can be tested from the command line using `curl`
+    ```shell
+    curl -X 'POST' \
+    'http://localhost:8000/predict_img' \
+    -H 'accept: application/json' \
+    -H 'Content-Type: application/json' \
+    -d '{
+    "url": "https://github.com/aaalexlit/hacking-human-vasculature/raw/main/dataset/test/images/1505.tif"
+    }' --output result.jpg
+    ```
+
+    Running this command will download the prediction as `result.jpg` file.
+    ![result.jpg](images/prediction_result.jpg)
