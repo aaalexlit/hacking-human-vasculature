@@ -181,3 +181,34 @@ There are 2 endpoints in the service
 
     Running this command will download the prediction as `result.jpg` file.
     ![result.jpg](images/prediction_result.jpg)
+
+# Containerization
+
+To build and spin the service docker container up run.  
+(*Before doing that make sure port **80** is not occupied*):
+
+```shell
+docker compose up --build
+```
+
+Then in this instance to test the service you can do it through the UI available on
+>!!!Note the port difference compared to the local version!!!
+
+http://localhost/docs
+
+or by running the following curl (for the RLE endpoind):
+
+```shell
+curl -X 'POST' \
+'http://localhost/predict_rle_mask' \
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{
+"url": "https://github.com/aaalexlit/hacking-human-vasculature/raw/main/dataset/test/images/1505.tif"
+}'
+```
+To clean up after stopping the container run
+
+```shell
+docker compose down
+```
