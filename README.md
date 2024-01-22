@@ -275,3 +275,73 @@ docker compose down
     # terminate port forwarding
     ```
 
+# Deploy to [AWS EKS](https://aws.amazon.com/eks/)
+
+1. Install `eksctl` following [the instructions](https://eksctl.io/installation/)
+
+1. Create EKS cluster by applying [eks-config.yaml](k8s/eks-config.yaml)
+
+    ```shell
+    eksctl create cluster -f k8s/eks-config.yaml
+    ```
+1. Create ECR if not exists, tag and push the image `blood-vessel-seg:v1` created on the previous step:
+    ```shell
+    ./k8s/push-to-ecr.sh blood-vessel-seg:v1 
+    ```
+
+1. Check the newly created EKS cluster nodes
+
+    ```shell
+    kubectl get nodes
+    ```
+1. Apply K8s deployment and service
+
+    ```shell
+    kubectl apply -f k8s/deployment-eks.yaml
+    kubectl apply -f k8s/service.yaml
+    ```
+1. Test getting the predictions through the load balancer on AWS
+    ```shell
+    curl -X 'POST' \
+    'http://a897730848cb34e6984ed9b1879dc310-720995883.us-west-2.elb.amazonaws.com/predict_rle_mask' \
+    -H 'accept: application/json' \
+    -H 'Content-Type: application/json' \
+    -d '{
+    "url": "https://github.com/aaalexlit/hacking-human-vasculature/raw/main/dataset/test/images/1505.tif"
+    }'
+    ```
+    ![prediction with the service deployed on AWS EKS](images/curl_service_on_aws_eks.png)
+
+## Visualize the pods on the AWS Console (Optional)
+
+1. To be able to see the cluster on the AWS Console aws-auth configMaps needs to be edited:
+
+    ```shell
+    kubectl edit configmap aws-auth -n kube-system
+    ```
+
+    And add the following:
+    ```yaml
+    mapUsers: "- groups: \n  - system:masters\n  userarn: arn:aws:iam::<aws-account-id>:root\n"
+    ```
+
+![EKS deployments on AWS Console](images/eks_deployments.png)
+
+## Delete the cluster and clean-up
+
+1. Delete cluster
+
+    ```shell
+    kubectl delete pdb coredns -n kube-system
+    eksctl delete cluster --name mlzoomcamp-cluster
+    ```
+
+1. delete ECR repo
+    ```shell
+    ./k8s/destroy-infra.sh
+    ```
+
+1. delete CloudFormation stack created by eksctl
+    ```
+    aws cloudformation delete-stack --stack-name eksctl-mlzoomcamp-cluster-nodegroup-ng-m5-large
+    ```
