@@ -5,6 +5,8 @@ This project intends to find a solution to the ongoing (at the time of writing J
 The project runs are logged to Weights&Biases:  
 https://wandb.ai/aaalex-lit/blood_vessel_segmentation
 
+![wandb](images/wandb.png)
+
 ## Project description
 
 Here's a short summary of the competition description:
