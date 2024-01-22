@@ -212,3 +212,66 @@ To clean up after stopping the container run
 ```shell
 docker compose down
 ```
+
+# Deploy on the local K8s cluster
+
+1. Install `kind` and `kubectl` following [the instructions](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
+
+1. Create K8s cluster with `kind` and check that it's running
+
+    ```shell
+    kind create cluster
+    kubectl cluster-info --context kind-kind
+    ```
+
+1. After running the service with docker-compose above you should have the image `hacking_human_vasculature-predict:latest`. We need to give it a tag so that it works properly with kind. Then we need to load the image into kind
+
+    ```shell
+    docker tag hacking_human_vasculature-predict:latest blood-vessel-seg:v1
+    kind load docker-image blood-vessel-seg:v1
+    ```
+
+1. Apply the [deployment.yaml](k8s/deployment.yaml)
+
+    ```shell
+    kubectl apply -f k8s/deployment.yaml 
+    ```
+
+1. Perform port-forwarding to test the deployment
+
+    ```shell
+    # get the pod name
+    kubectl get po
+    # use the pod copied from the output of the previous line
+    kubectl port-forward segment-8587787685-9xgdc 8080:80
+    # Curl from the other terminal
+    curl -X 'POST' \
+        'http://localhost:8080/predict_rle_mask' \
+        -H 'accept: application/json' \
+        -H 'Content-Type: application/json' \
+        -d '{
+        "url": "https://github.com/aaalexlit/hacking-human-vasculature/raw/main/dataset/test/images/1505.tif"
+        }'
+    # terminate port forwarding
+    ```
+
+1. Create K8s service for load balancing applying [service.yaml](k8s/service.yaml)
+    ```shell
+    kubectl apply -f k8s/service.yaml
+    ```
+
+1. And test it using the port forwarding again
+
+    ```shell
+    kubectl port-forward svc/segment 8080:80  
+    # Curl from the other terminal
+    curl -X 'POST' \
+        'http://localhost:8080/predict_rle_mask' \
+        -H 'accept: application/json' \
+        -H 'Content-Type: application/json' \
+        -d '{
+        "url": "https://github.com/aaalexlit/hacking-human-vasculature/raw/main/dataset/test/images/1505.tif"
+        }'
+    # terminate port forwarding
+    ```
+

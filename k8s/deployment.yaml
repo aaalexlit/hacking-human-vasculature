@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: segment
+spec:
+  selector:
+    matchLabels:
+      app: segment
+  template:
+    metadata:
+      labels:
+        app: segment
+    spec:
+      containers:
+      - name: segment
+        image: blood-vessel-seg:v1
+        resources:
+          limits:
+            memory: "2G"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
