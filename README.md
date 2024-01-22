@@ -128,7 +128,9 @@ python train.py
 
 # Model deployment 
 
-Model is deployed with [FastAPI](https://fastapi.tiangolo.com/) + Uvicorn
+Model is deployed with [FastAPI](https://fastapi.tiangolo.com/) + Uvicorn 
+
+## Running locally
 To run the service locally execute
 ```shell
 python predict.py
@@ -136,6 +138,8 @@ python predict.py
 That will spin up uvicorn server on port 8000 (make sure it's not occupied)
 
 The API can be tested directly in the browser using the built-in Swagger UI, accessible at http://127.0.0.1:8000/docs.
+
+![Swagger UI](images/openaoi_ui.png)
 
 There are 2 endpoints in the service
 
